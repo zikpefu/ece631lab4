@@ -6,8 +6,6 @@
 #define IDD_DIALOG1                     112
 #define IDD_DIALOG2                     114
 #define IDC_INTENSITY                   1007
-#define IDOK                            1010
-#define IDCANCEL                        1011
 #define IDC_CENT_DIST                   1012
 #define IDC_EDIT1                       1013
 #define IDC_EDIT2                       1014
