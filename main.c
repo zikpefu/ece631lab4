@@ -85,7 +85,7 @@ switch (uMsg)
 		PaintImage();
 		break;
 	  case ID_REGIONGROW_CHANGEP:
-		  DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG_CHANGEP), hWnd, DialogProc);
+		  DialogBox((LPCSTR)GetModuleHandle(Instance), MAKEINTRESOURCE(IDD_DIALOG2), hWnd, AboutDlgProc);
 		  break;
 	  case ID_REGIONGROW_CHANGECOLOR:
 		  CColorDialogBox(hWnd);
@@ -314,13 +314,40 @@ void RegionGrowThread(HWND hndle) {
 DIALOG BOX STUFF
 */
 
-BOOL CALLBACK DialogProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
+
+BOOL CALLBACK AboutDlgProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
+{
+	switch (Message)
+	{
+	case WM_INITDIALOG:
+
+		return TRUE;
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case IDOK:
+			EndDialog(hWnd, IDOK);
+			break;
+		case IDCANCEL:
+			EndDialog(hWnd, IDCANCEL);
+			break;
+		}
+		break;
+	default:
+		return FALSE;
+	}
+	return TRUE;
+}
+
+BOOL CALLBACK DialogProc(HWND win, UINT msg, WPARAM wp, LPARAM lp) {
 	char str1[10];
 	char str2[10];
 
 	switch (msg)
 	{
-	case WM_INITDIALOG: {		return TRUE;	}
+	case WM_INITDIALOG: {
+		return TRUE;
+	}
 	case WM_COMMAND:
 		switch (LOWORD(wp))
 		{
@@ -336,11 +363,11 @@ BOOL CALLBACK DialogProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			pixel_intensity = atoi(str1);
 			cent_dist = atoi(str2);
 			*/
-			EndDialog(hWnd, wp);
+			EndDialog(win, wp);
 			break;
 
 		case IDCANCEL:
-			EndDialog(hWnd, wp);
+			EndDialog(win, wp);
 			return FALSE;
 		}
 	}

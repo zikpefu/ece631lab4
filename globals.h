@@ -12,6 +12,7 @@
 char	filename[MAX_FILENAME_CHARS];
 
 HWND	MainWnd;
+HINSTANCE Instance;
 
 		// Display flags
 int		ShowPixelCoords;
@@ -44,6 +45,6 @@ void AnimationThread(void *);		/* passes address of window */
 void RegionGrowThread(void *);
 //void registerDialog(HINSTANCE);
 //void displayDialog(HWND);
-LRESULT CALLBACK DialogProc(HWND, UINT, WPARAM, LPARAM);
+BOOL CALLBACK AboutDlgProc(HWND, UINT, WPARAM, LPARAM);
 void CColorDialogBox(HWND);
 void reg_grow(const unsigned char *,HDC, int, int,int,int,int,int,int,int);
